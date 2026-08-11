@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head><title>Measure</title>
+<style>
+body{margin:0;background:#222;color:#fff;font:14px monospace}
+.wrap{position:relative;display:inline-block}
+img{display:block;max-height:90vh}
+.info{position:fixed;top:10px;left:10px;background:rgba(0,0,0,.8);padding:10px;z-index:10}
+</style>
+</head>
+<body>
+<div class="info" id="info">Move mouse over image</div>
+<select id="sel" onchange="load()">
+<option value="card-glow.png">card-glow (610x907)</option>
+<option value="card-clean.png">card-clean (477x712)</option>
+<option value="card-paper.png">card-paper (476x713)</option>
+<option value="card-night.png">card-night (475x711)</option>
+<option value="card-landscape.png">card-landscape (1317x711)</option>
+</select>
+<div class="wrap" id="wrap">
+<img id="img" src="/templates/card-glow.png"/>
+</div>
+<script>
+const dims={
+  'card-glow.png':[610,907],
+  'card-clean.png':[477,712],
+  'card-paper.png':[476,713],
+  'card-night.png':[475,711],
+  'card-landscape.png':[1317,711]
+};
+function load(){
+  const f=document.getElementById('sel').value;
+  document.getElementById('img').src='/templates/'+f;
+}
+document.getElementById('wrap').addEventListener('mousemove',e=>{
+  const img=document.getElementById('img');
+  const rect=img.getBoundingClientRect();
+  const f=document.getElementById('sel').value;
+  const [w,h]=dims[f];
+  const px=(e.clientX-rect.left)/rect.width*w;
+  const py=(e.clientY-rect.top)/rect.height*h;
+  const pctX=(px/w*100).toFixed(1);
+  const pctY=(py/h*100).toFixed(1);
+  document.getElementById('info').textContent=
+    `px: ${px.toFixed(0)}, ${py.toFixed(0)} | %: ${pctX}, ${pctY} | img: ${w}x${h}`;
+});
+</script>
+</body>
+</html>
+</CodeContent>
+<parameter name="Description">Measurement tool to figure out exact coordinates for template placement

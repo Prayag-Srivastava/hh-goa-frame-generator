@@ -1,1 +1,125 @@
-import html2canvas from'html2canvas-pro';import jsPDF from'jspdf';export type ExportFormat='png'|'twitter'|'square'|'story'|'whatsapp'|'pdf'|'gif';const dims={png:[3000,3750],twitter:[1200,630],square:[1080,1080],story:[1080,1920],whatsapp:[1080,1080]} as const;export async function exportNode(el:HTMLElement,format:ExportFormat,name='goa-frame'){if(format==='pdf'){const canvas=await html2canvas(el,{backgroundColor:null,scale:3,useCORS:true});const pdf=new jsPDF({orientation:'portrait',unit:'px',format:[1080,1620]});pdf.addImage(canvas.toDataURL('image/png'),'PNG',0,0,1080,1620);pdf.addPage();pdf.setFillColor(10,53,39);pdf.rect(0,0,1080,1620,'F');pdf.setTextColor(245,213,71);pdf.setFontSize(48);pdf.text('GOA//FRAME PASSPORT',90,160);pdf.setTextColor(251,245,228);pdf.setFontSize(30);pdf.text('Signed by 2:47 PM Studio · Hacker House Goa 2026',90,240);pdf.save(`${name}.pdf`);return}const canvas=await html2canvas(el,{backgroundColor:null,scale:3,useCORS:true});const [w,h]=dims[format==='gif'?'png':format]||dims.png;const out=document.createElement('canvas');out.width=w;out.height=h;const ctx=out.getContext('2d')!;ctx.fillStyle='#0a3527';ctx.fillRect(0,0,w,h);const s=Math.min(w/canvas.width,h/canvas.height);const dw=canvas.width*s,dh=canvas.height*s;ctx.drawImage(canvas,(w-dw)/2,(h-dh)/2,dw,dh);const a=document.createElement('a');a.href=out.toDataURL('image/png');a.download=`${name}-${format}.png`;a.click()}
+import html2canvas from "html2canvas-pro";
+import jsPDF from "jspdf";
+export type ExportFormat =
+  | "png"
+  | "twitter"
+  | "square"
+  | "story"
+  | "whatsapp"
+  | "pdf"
+  | "gif";
+const dims = {
+  png: [3000, 4478],
+  twitter: [1200, 630],
+  square: [1080, 1080],
+  story: [1080, 1920],
+  whatsapp: [1080, 1080],
+} as const;
+export async function exportNode(
+  el: HTMLElement,
+  format: ExportFormat,
+  name = "goa-frame",
+) {
+  const canvas = await html2canvas(el, {
+    backgroundColor: null,
+    scale: 3,
+    useCORS: true,
+    logging: false,
+  });
+
+  if (format === "pdf") {
+    const targetWidth = 1080;
+    const targetHeight = Math.round(
+      targetWidth * (canvas.height / canvas.width)
+    );
+
+    const pdf = new jsPDF({
+      orientation: targetWidth > targetHeight ? "landscape" : "portrait",
+      unit: "px",
+      format: [targetWidth, targetHeight],
+    });
+
+    pdf.addImage(
+      canvas.toDataURL("image/png"),
+      "PNG",
+      0,
+      0,
+      targetWidth,
+      targetHeight
+    );
+
+    pdf.save(`${name}.pdf`);
+    return;
+  }
+
+  /*
+   * PNG = exact card only
+   *
+   * The output keeps the same aspect ratio as the actual
+   * rendered card. No green background and no stretching.
+   */
+  if (format === "png") {
+    const targetWidth = 3000;
+    const targetHeight = Math.round(
+      targetWidth * (canvas.height / canvas.width)
+    );
+
+    const out = document.createElement("canvas");
+    out.width = targetWidth;
+    out.height = targetHeight;
+
+    const ctx = out.getContext("2d")!;
+
+    ctx.drawImage(
+      canvas,
+      0,
+      0,
+      targetWidth,
+      targetHeight
+    );
+
+    const a = document.createElement("a");
+    a.href = out.toDataURL("image/png");
+    a.download = `${name}.png`;
+    a.click();
+
+    return;
+  }
+
+  /*
+   * Social formats
+   * These intentionally use their own aspect ratios.
+   */
+  const [w, h] =
+    dims[format === "gif" ? "png" : format] || dims.png;
+
+  const out = document.createElement("canvas");
+  out.width = w;
+  out.height = h;
+
+  const ctx = out.getContext("2d")!;
+
+  ctx.fillStyle = "#0a3527";
+  ctx.fillRect(0, 0, w, h);
+
+  const s = Math.min(
+    w / canvas.width,
+    h / canvas.height
+  );
+
+  const dw = canvas.width * s;
+  const dh = canvas.height * s;
+
+  ctx.drawImage(
+    canvas,
+    (w - dw) / 2,
+    (h - dh) / 2,
+    dw,
+    dh
+  );
+
+  const a = document.createElement("a");
+  a.href = out.toDataURL("image/png");
+  a.download = `${name}-${format}.png`;
+  a.click();
+}
