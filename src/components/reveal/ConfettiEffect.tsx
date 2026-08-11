@@ -1,0 +1,1 @@
+export default function ConfettiEffect(){return <div className="pointer-events-none fixed inset-0 z-50">{Array.from({length:90}).map((_,i)=><i key={i} className="absolute h-3 w-2 animate-bounce" style={{left:`${(i*37)%100}%`,top:`${(i*19)%80}%`,background:['#FF3D8B','#F5D547','#22d3ee','#FBF5E4'][i%4],transform:`rotate(${i*17}deg)`,animationDuration:`${1+(i%5)*.3}s`}}/>)}</div>}

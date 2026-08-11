@@ -1,0 +1,1 @@
+import{counter}from'../../lib/cardGenerator';export function StatsBar(){return <div className="mx-auto mt-8 grid max-w-5xl grid-cols-2 gap-3 rounded-3xl border border-cream/15 bg-ink/40 p-3 text-center text-xs md:grid-cols-4"><b>{counter().toLocaleString()} hackers framed</b><b>322,560 combinations</b><b>8 archetypes</b><b>5 rarities</b></div>}

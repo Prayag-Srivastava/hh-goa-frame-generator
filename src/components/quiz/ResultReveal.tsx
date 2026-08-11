@@ -1,0 +1,1 @@
+import{getArchetype}from'../../data/archetypes';export default function ResultReveal({id}:{id:string}){const a=getArchetype(id);return <div className="rounded-3xl bg-ink/50 p-5 text-center"><div className="text-6xl">{a.emoji}</div><h3 className="font-display text-3xl text-yellow-sun">{a.name}</h3><p className="font-hand text-3xl text-pink-hot">{a.tagline}</p></div>}

@@ -1,0 +1,1 @@
+import type{Sticker}from'../types';export const stickers:Sticker[]='🌴,☀️,🥥,🌊,🛵,🍾,🎧,💻,⚡,🔥,🐚,⛵,🏄,🦀,🌺,✨,💾,🚀,🎟️,📍,🍹,🎭,🏛️,🌙'.split(',').map((emoji,i)=>({id:'s'+i,emoji,label:['Palm','Sun','Coconut','Wave','Scooter','Feni','Headphones','Laptop','Bolt','Fire','Shell','Boat','Surf','Crab','Hibiscus','Sparkle','Floppy','Rocket','Ticket','Pin','Drink','Mask','Church','Moon'][i]}));

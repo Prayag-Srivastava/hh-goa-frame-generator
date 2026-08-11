@@ -1,0 +1,1 @@
+import{useState}from'react';import{detectFace}from'../lib/faceDetection';export function useFaceDetection(){const[loading,setLoading]=useState(false);const[face,setFace]=useState<Awaited<ReturnType<typeof detectFace>>>(null);async function run(src:string){setLoading(true);const f=await detectFace(src);setFace(f);setLoading(false);return f}return{loading,face,run}}

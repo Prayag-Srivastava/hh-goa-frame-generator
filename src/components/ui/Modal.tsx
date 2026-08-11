@@ -1,0 +1,1 @@
+import{ReactNode}from'react';export function Modal({open,children}:{open:boolean,children:ReactNode}){return open?<div className="fixed inset-0 z-50 grid place-items-center bg-ink/80 p-4"><div className="glass max-w-xl rounded-3xl p-6">{children}</div></div>:null}

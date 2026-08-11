@@ -1,0 +1,1 @@
+export default function Footer(){return <footer className="mt-16 border-t border-cream/10 bg-ink/50 px-6 py-6 text-center text-xs text-cream/60 scanlines">SYS_GOA_ONLINE · LOC: 15.2993° N · STATUS: VIBING · SIGNED BY 2:47 PM STUDIO</footer>}
