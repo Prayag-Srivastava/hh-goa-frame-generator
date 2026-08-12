@@ -1,1 +1,27 @@
-import{Routes,Route,useLocation}from'react-router-dom';import{AnimatePresence}from'framer-motion';import Nav from'./components/layout/Nav';import Footer from'./components/layout/Footer';import Home from'./pages/Home';import Create from'./pages/Create';import CardView from'./pages/CardView';import HallOfFame from'./pages/HallOfFame';import{useEasterEggs}from'./hooks/useEasterEggs';export default function App(){const loc=useLocation();const egg=useEasterEggs();return <div className={`${egg==='konami'?'aurora':''}`}><Nav/><AnimatePresence mode="wait"><Routes location={loc} key={loc.pathname}><Route path="/" element={<Home/>}/><Route path="/create" element={<Create/>}/><Route path="/card/:id" element={<CardView/>}/><Route path="/hall-of-fame" element={<HallOfFame/>}/></Routes></AnimatePresence><Footer/></div>}
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import Nav from "./components/layout/Nav";
+import Footer from "./components/layout/Footer";
+import Home from "./pages/Home";
+import Create from "./pages/Create";
+import CardView from "./pages/CardView";
+import HallOfFame from "./pages/HallOfFame";
+import { useEasterEggs } from "./hooks/useEasterEggs";
+export default function App() {
+  const loc = useLocation();
+  const egg = useEasterEggs();
+  return (
+    <div className={`${egg === "konami" ? "aurora" : ""}`}>
+      <Nav />
+      <AnimatePresence mode="wait">
+        <Routes location={loc} key={loc.pathname}>
+          <Route path="/" element={<Home />} />
+          <Route path="/create" element={<Create />} />
+          <Route path="/card/:id" element={<CardView />} />
+          <Route path="/hall-of-fame" element={<HallOfFame />} />
+        </Routes>
+      </AnimatePresence>
+      <Footer />
+    </div>
+  );
+}

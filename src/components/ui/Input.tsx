@@ -1,1 +1,12 @@
-import{InputHTMLAttributes}from'react';export function Input(p:InputHTMLAttributes<HTMLInputElement>){return <input {...p} className={'w-full rounded-2xl border border-cream/15 bg-ink/40 px-4 py-3 text-cream outline-none focus:border-pink-hot '+(p.className||'')}/>}
+import { InputHTMLAttributes } from "react";
+export function Input(p: InputHTMLAttributes<HTMLInputElement>) {
+  return (
+    <input
+      {...p}
+      className={
+        "w-full rounded-2xl border border-cream/15 bg-ink/40 px-4 py-3 text-cream outline-none focus:border-pink-hot " +
+        (p.className || "")
+      }
+    />
+  );
+}

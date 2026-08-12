@@ -50,7 +50,7 @@ const templates: Record<string, Template> = {
     src: "/templates/card-clean.png",
     ratio: "477/712",
     baseWidth: 477,
-    photo: { x: 8.4, y: 28.2, w: 36.1, h: 31.7 },
+    photo: { x: 9.5, y: 28.4, w: 36.1, h: 31.7 },
     fields: [
   { x: 51.8, y: 29.2, w: 40.7, h: 7.3 },
   { x: 51.8, y: 37.0, w: 40.7, h: 7.3 },
@@ -67,7 +67,7 @@ const templates: Record<string, Template> = {
     src: "/templates/card-paper.png",
     ratio: "476/713",
     baseWidth: 476,
-    photo: { x: 8.2, y: 27.5, w: 36.6, h: 32.5 },
+    photo: { x: 9, y: 28.1, w: 36.6, h: 32.5 },
     fields: [
   { x: 51.8, y: 29.2, w: 40.7, h: 7.3 },
   { x: 51.8, y: 37.0, w: 40.7, h: 7.3 },
@@ -84,7 +84,7 @@ const templates: Record<string, Template> = {
     src: "/templates/card-night.png",
     ratio: "475/711",
     baseWidth: 475,
-    photo: { x: 7.8, y: 30.5, w: 36.4, h: 31.2 },
+    photo: { x: 8.6, y: 28.3, w: 36.4, h: 31.2 },
     fields: [
   { x: 51.8, y: 29.1, w: 40.7, h: 7.3 },
   { x: 51.8, y: 36.5, w: 40.7, h: 7.3 },
@@ -101,7 +101,7 @@ const templates: Record<string, Template> = {
     src: "/templates/card-landscape.png",
     ratio: "1317/711",
     baseWidth: 1317,
-    photo: { x: 8.6, y: 18.2, w: 33.6, h: 63.6 },
+    photo: { x: 11.2, y: 27.8, w: 28.7, h: 50 },
     fields: [
       { x: 48.0, y: 22.0, w: 28.0, h: 8.0 },
       { x: 48.0, y: 34.0, w: 28.0, h: 8.0 },
@@ -265,36 +265,38 @@ const valueFontSize =
           USER PHOTO
           ========================================= */}
 
-      <div
-        className="absolute z-10 overflow-hidden"
-        style={{
-          ...box(t.photo, `${photoRadius}px`),
-        }}
-      >
-        {card.photo ? (
-          <img
-            src={card.photo}
-            alt=""
-            draggable={false}
-            className="h-full w-full object-cover"
-            style={{
-              filter: filterCss(card.filter),
-              transform: `
-                translate(
-                  ${card.photoX}px,
-                  ${card.photoY}px
-                )
-                scale(${card.photoZoom})
-                rotate(${card.photoRotate}deg)
-              `,
-            }}
-          />
-        ) : (
-          <div className="grid h-full w-full place-items-center bg-transparent text-5xl opacity-80">
-            👤
-          </div>
-        )}
-      </div>
+      {/* =========================================
+    USER PHOTO
+    ========================================= */}
+
+<div
+  className="absolute z-10 overflow-hidden"
+  style={{
+    ...box(t.photo, `${photoRadius}px`),
+  }}
+>
+  {card.photo ? (
+    <img
+      src={card.photo}
+      alt="User photo"
+      draggable={false}
+      className="absolute inset-0 h-full w-full object-cover"
+      style={{
+        filter: filterCss(card.filter),
+        transformOrigin: "center center",
+        transform: `
+          translate(${card.photoX || 0}px, ${card.photoY || 0}px)
+          scale(${card.photoZoom || 1})
+          rotate(${card.photoRotate || 0}deg)
+        `,
+      }}
+    />
+  ) : (
+    <div className="grid h-full w-full place-items-center bg-transparent text-5xl opacity-80">
+      👤
+    </div>
+  )}
+</div>
 
       {/* =========================================
           DYNAMIC FIELDS
