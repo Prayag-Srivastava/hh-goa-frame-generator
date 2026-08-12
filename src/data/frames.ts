@@ -9,5 +9,5 @@ export const idLayouts=[
  ['card-clean','SUNSET BUILDER'],
  ['card-paper','PAPER BEACH'],
  ['card-night','MIDNIGHT BUILDER'],
- ['card-landscape','LANDSCAPE SUNSET']
+//  ['card-landscape','LANDSCAPE SUNSET']
 ].map(([id,name])=>({id,name}));

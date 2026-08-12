@@ -1,1 +1,32 @@
-import type{CardData}from'../../types';import PFPFrame from'./pfp/PFPFrames';import IDLayout from'./id/IDLayouts';import RarityOverlay from'./RarityOverlay';export default function CardCanvas({card,exporting=false,onStickerMove}:{card:CardData,exporting?:boolean,onStickerMove?:(i:number,x:number,y:number)=>void}){const fx=card.mode==='pfp'?`${card.rarity==='RARE'?'shimmer':''} ${card.rarity==='LEGENDARY'?'legendary-particles':''} ${card.rarity==='MYTHIC'?'aurora':''}`:'';return <div id="goa-export-card" className={`relative ${fx}`}>{card.mode==='pfp'?<PFPFrame card={card} exporting={exporting} onStickerMove={onStickerMove}/>:<IDLayout card={card} onStickerMove={onStickerMove}/>} {card.mode==='pfp'&&<RarityOverlay rarity={card.rarity}/>}</div>}
+import type { CardData } from "../../types";
+import PFPFrame from "./pfp/PFPFrames";
+import IDLayout from "./id/IDLayouts";
+import RarityOverlay from "./RarityOverlay";
+export default function CardCanvas({
+  card,
+  exporting = false,
+  onStickerMove,
+}: {
+  card: CardData;
+  exporting?: boolean;
+  onStickerMove?: (i: number, x: number, y: number) => void;
+}) {
+  const fx =
+    card.mode === "pfp"
+      ? `${card.rarity === "RARE" ? "shimmer" : ""} ${card.rarity === "LEGENDARY" ? "legendary-particles" : ""} ${card.rarity === "MYTHIC" ? "aurora" : ""}`
+      : "";
+  return (
+    <div id="goa-export-card" className={`relative ${fx}`}>
+      {card.mode === "pfp" ? (
+        <PFPFrame
+          card={card}
+          exporting={exporting}
+          onStickerMove={onStickerMove}
+        />
+      ) : (
+        <IDLayout card={card} onStickerMove={onStickerMove} />
+      )}{" "}
+      {card.mode === "pfp" && <RarityOverlay rarity={card.rarity} />}
+    </div>
+  );
+}
